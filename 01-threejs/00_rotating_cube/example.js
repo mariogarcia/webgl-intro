@@ -4,13 +4,13 @@ const start = () => {
 
     var canvas = document.getElementById('glcanvas');
 	var renderer = new THREE.WebGLRenderer({ canvas: canvas});
-
     renderer.setSize( window.innerWidth, window.innerHeight );
+
 	var geometry = new THREE.BoxGeometry( 1, 1, 1 );
 	var material = new THREE.MeshBasicMaterial( { color: 0xcccccc } );
 	var cube = new THREE.Mesh( geometry, material );
-	scene.add( cube );
 
+	scene.add( cube );
 	camera.position.z = 3;
 
 	var animate = function () {
