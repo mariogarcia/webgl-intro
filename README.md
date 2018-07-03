@@ -40,140 +40,36 @@ All WebGL applications normally follow the same three steps:
 - Get WebGL context from the canvas
 - Interact with WebGL context
 
-### Simple example
-
-This example is taken from
-https://developer.mozilla.org/es/docs/Web/API/WebGL_API/Tutorial/Getting_started_with_WebGL
-
-#### Adding Canvas
-
-```html
-<html>
-    <body>
-        <canvas id="glcanvas" width="640" height="480">
-
-        </canvas>
-    </body>
-</html>
-```
-
-#### Get the WebGL context from the canvas
-
-```html
-<html>
-    <head>
-        <script type="text/javascript">
-            var gl;
-
-            function start() {
-                var canvas = document.getElementById("glcanvas");
-                gl = initWebGL(canvas);
-
-                if (gl) {
-                    // Add something to WebGL
-                }
-            }
-        </script>
-    </head>
-    <body onload="start()">
-        <canvas id="glcanvas" width="640" height="480">
-
-        </canvas>
-    </body>
-</html>
-```
-
-Where the `initWebGL()` function looks like:
-
-```javascript
-function initWebGL(canvas) {
-  gl = null;
-
-  try {
-    // Extracts the webgl context
-    gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-  }
-  catch(e) {}
-
-  // if there is none then show an alert message
-  if (!gl) {
-    alert("Cant initializate WebGL. Your browser dont support this feature.");
-    gl = null;
-  }
-
-  return gl;
-}
-```
-
-#### Interact with WebGL context
-
-```html
-<html>
-    <head>
-        <script type="text/javascript">
-            var gl;
-
-            function start() {
-                var canvas = document.getElementById("glcanvas");
-                gl = initWebGL(canvas);
-
-                if (gl) {
-                     gl.clearColor(0.0, 0.0, 0.0, 1.0);                      // black color based. Completely opaque
-                     gl.enable(gl.DEPTH_TEST);                               // Testing depth
-                     gl.depthFunc(gl.LEQUAL);                                // Closer objects shadow further objects
-                     gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);      // Clean up color and depth buffers
-                }
-            }
-        </script>
-    </head>
-    <body onload="start()">
-        <canvas id="glcanvas" width="640" height="480">
-
-        </canvas>
-    </body>
-</html>
-```
-
 ### More tutorials
 
-#### General
+> General
 
 - http://www.jlabstudio.com/webgl/category/programacion/webgl/
 - https://webglfundamentals.org/
 
-#### Shaders
+> Shaders
 
 - https://developer.mozilla.org/en-US/docs/Learn/WebGL/By_example/Hello_GLSL
 - https://github.com/stackgl/shader-school
 
-## WebGL libraries
+### WebGL libraries
+
+> Framework comparison
 
 https://en.wikipedia.org/wiki/List_of_WebGL_frameworks
 
-#### General
-#### Three.js
+>  General
 
-> Three.js: https://threejs.org/
+- Three.js: https://threejs.org/
+- PixiJS: http://www.pixijs.com/
+- TWGL: https://twgljs.org/
+- PhiloGL: http://www.senchalabs.org/philogl/
+- Stardust: https://stardustjs.github.io/
 
-#### PixiJS
+> GLSL
 
-> PixiJS: http://www.pixijs.com/
+- GLSLIFY:  https://www.npmjs.com/package/glslify
 
-#### TWGL: A Tiny WebGL helper Library
+> Charts
 
-> TWGL: https://twgljs.org/
-
-### GLSL
-
-### GLSLIFY
-
-- https://www.npmjs.com/package/glslify
-
-
-### PhiloGL
-
-http://www.senchalabs.org/philogl/
-
-### Stardust
-
-https://stardustjs.github.io/
+- Plot.ly: https://plot.ly/
