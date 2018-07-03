@@ -1,7 +1,22 @@
 <html>
     <head>
         <link rel="stylesheet" href="intro.css"></link>
+        <script type="text/javascript" src="WebGLUtil.js"></script>
         <script type="text/javascript" src="intro.js"></script>
+        <script id="shader-vx" type="x-shader/x-vertex">
+            attribute vec4 a_position;
+
+            void main() {
+                gl_Position = a_position;
+            }
+        </script>
+        <script id="shader-fs" type="x-shader/x-fragment">
+            precision mediump float;
+
+            void main() {
+                gl_FragColor = vec4(1, 0, 0.5, 1); // return redish-purple
+            }
+        </script>
     </head>
     <body onload="start()">
         <canvas id="glcanvas">

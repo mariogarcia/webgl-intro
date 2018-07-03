@@ -1,63 +1,36 @@
-/**
- * Creates a new WebGL context if the browser supports the WebGL
- * specification
- *
- * @param canvas the canvas to take the WebGL context from
- * @return a WebGL context if the browser supported it
- */
-const initWebGL = (canvas) => {
-    gl = null;
-
-    try {
-        // Extracts the webgl context
-        gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
-    } catch(e) {}
-
-    // if there is none then show an alert message
-    if (!gl) {
-        alert("Cant initializate WebGL. Your browser dont support this feature.");
-        gl = null;
-    }
-
-    return gl;
-};
-
-/**
- * Function that executes the function passed as argument
- * if the WebGL context passed as first argument exists
- *
- * @param webGL the WebGL context
- * @param function that requires a WebGL context
- */
-const withWebGL = (webGL, func) => {
-    if (webGL) {
-        func(webGL);
-    }
-};
-
-const initShaders = (webGL) => {
-
-};
-
-const initBuffers = (webGL) => {
-
-};
-
-const drawScene = (webGL, shaders, buffers) => {
-    webGL.clearColor(0.0, 0.0, 0.0, 1.0);
-    webGL.enable(wgl.DEPTH_TEST);
-
-};
-
 const start = () => {
     const canvas = document.getElementById("glcanvas");
     const wglCtx = initWebGL(canvas);
 
     withWebGL(wglCtx, (wgl) => {
+        const vertexShader = createShaderFromScript(wgl, "shader-vx");
+        const fragmentShader = createShaderFromScript(wgl, "shader-fs");
+        const program = createProgram(wgl, vertexShader, fragmentShader);
+        const positionAttributeLocation = wgl.getAttribLocation(program, "a_position");
+        const positions = [
+            0, 0,
+            0, 0.5,
+            0.7, 0,
+        ];
 
-        const shaders = initShaders(wgl);
-        const buffers = initBuffers(wgl);
+        createBuffer(wgl, positions)
 
-        drawScene(wgl, shaders, buffers);
+        wgl.clearColor(0.0, 0.0, 0.0, 0.2);
+        wgl.clear(wgl.COLOR_BUFFER_BIT | wgl.DEPTH_BUFFER_BIT);
+        wgl.enableVertexAttribArray(positionAttributeLocation);  // Turn on the attribute
+
+        // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
+        var size = 2;          // 2 components per iteration
+        var type = wgl.FLOAT;   // the data is 32bit floats
+        var normalize = false; // don't normalize the data
+        var stride = 0;        // 0 = move forward size * sizeof(type) each iteration to get the next position
+        var offset = 0;        // start at the beginning of the buffer
+        wgl.vertexAttribPointer(positionAttributeLocation, size, type, normalize, stride, offset)
+
+        // draw
+        var primitiveType = wgl.TRIANGLES;
+        var offset = 0;
+        var count = 3;
+        wgl.drawArrays(primitiveType, offset, count);
     })
 };
