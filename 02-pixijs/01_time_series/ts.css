@@ -1,0 +1,23 @@
+body, h1, h2, p {
+    margin: 0px;
+}
+
+h1 {
+    padding: 10px;
+    color: #666666;
+    background-color: #e3ebf7;
+}
+
+p {
+    padding: 10px;
+    background-color: #ebebeb;
+}
+
+div.example {
+    padding: 10px;
+}
+
+div.example div {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
