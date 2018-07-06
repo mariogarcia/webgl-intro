@@ -98,7 +98,7 @@ const convertTo = (conf) => (point) => {
  * @return a list with the converted points
  * @since 0.1.0
  */
-const convertTimeSeries = (timeFormat, points) => {
+const convertTimeSeries = (timeFormat) => (points) => {
     const sourceList = List(points)
 
     const minX = sourceList.min((p) => p.x)
