@@ -1,22 +1,20 @@
-const toPoints = (map) => {
+const toPoints = (history) => {
     return {
-        x: map.time,
-        y: map.value
+        x: history.x,
+        y: history.y
     }
 }
 
-// TODO fetch requires http/s
-const readJsonList = () => {
-    fetch("ts.json")
-        .then(response => response.json())
-        .then(json => console.log(json));
-}
+const process = (response) => {
+    const points = response
+        .data
+        .signalHistory
+        .history
+        .map(toPoints)
 
-const data = readJsonList()
-    .map(toPoints)
-    .map(convertTimeSeries('dd/MM/yyyy'))
+    const data = convertTimeSeries(points, 'dd/MM/yyyy')
+    console.log('data ==>', data)
 
-const start = () => {
     const kalGraph = new KalGraph({
         width: 1200,
         height: 250,
@@ -30,4 +28,10 @@ const start = () => {
         refY: 100,
         width: 1
     })
+}
+
+const start = () => {
+    fetch("http://localhost:8080/ts.json")
+        .then(response => response.json())
+        .then(process)
 }

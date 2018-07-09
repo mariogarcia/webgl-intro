@@ -13,13 +13,12 @@ in the canvas.
 
 #### Data
 
-I'm using data coming from https://earthquake.usgs.gov
+Data has dates as x values.
 
 #### Goals
 
-- [ ] The graph will show the severity of every eartquake
-- [ ] Every earthquake point will show a tooltip showing the related
-  information
+- [ ] The graph will show x axis with every point interleave of a second
+- [ ] Every point will show a tooltip showing the related information
 - [ ] The graph should show both x and y axis
 - [ ] The graph should show x ticks
 - [ ] The graph should show y ticks

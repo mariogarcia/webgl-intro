@@ -14,7 +14,7 @@ class Point {
     constructor(pointMap) {
         this.x = pointMap.x;
         this.y = pointMap.y;
-        this.source = pointMap
+        this.source = pointMap.source
     }
 }
 
@@ -78,15 +78,16 @@ const diffY = (y, minY) => {
  * @return a converted point
  * @since 0.1.0
  */
-const convertTo = (conf) => (point) => {
+const convertTo = (conf, point) => {
     const diff_x = diffX(point.x, conf.x.min, conf.format, conf.interval)
     const diff_y = diffY(point.y, conf.y.min)
-
-    return new Point({
+    const newPnt = new Point({
         x: diff_x,
         y: diff_y,
         source: point
     })
+
+    return newPnt
 };
 
 /**
@@ -98,13 +99,13 @@ const convertTo = (conf) => (point) => {
  * @return a list with the converted points
  * @since 0.1.0
  */
-const convertTimeSeries = (timeFormat) => (points) => {
-    const sourceList = List(points)
+const convertTimeSeries = (points, timeFormat) => {
+    const sourceList = Immutable.List(points)
 
-    const minX = sourceList.min((p) => p.x)
-    const maxX = sourceList.max((p) => p.x)
-    const minY = sourceList.min((p) => p.y)
-    const maxY = sourceList.max((p) => p.y)
+    const minX = sourceList.min((p) => p.x).x
+    const maxX = sourceList.max((p) => p.x).x
+    const minY = sourceList.min((p) => p.y).y
+    const maxY = sourceList.max((p) => p.y).y
 
     const conf = {
         format: timeFormat,
@@ -120,6 +121,5 @@ const convertTimeSeries = (timeFormat) => (points) => {
     }
 
     return sourceList
-        .map((point) => new Point(point))
-        .map(convertTo(conf))
+        .map((point) => convertTo(conf, new Point(point)))
 };
