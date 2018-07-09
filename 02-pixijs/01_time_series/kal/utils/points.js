@@ -56,8 +56,9 @@ const createRandomPoints = (maxX, maxY, howMany) => {
 const diffX = (x, minX, format, interval) => {
     const minDate = moment(minX, format);
     const curDate = moment(x, format);
+    const difference = curDate.diff(minDate, interval);
 
-    curDate.diff(minDate, interval);
+    return difference
 }
 
 /**
@@ -109,7 +110,7 @@ const convertTimeSeries = (points, timeFormat) => {
 
     const conf = {
         format: timeFormat,
-        interval: "days",
+        interval: "seconds",
         x: {
             min: minX,
             max: maxX

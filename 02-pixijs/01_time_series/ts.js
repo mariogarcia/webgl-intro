@@ -12,7 +12,7 @@ const process = (response) => {
         .history
         .map(toPoints)
 
-    const data = convertTimeSeries(points, 'dd/MM/yyyy')
+    const data = convertTimeSeries(points, 'YYYY-MM-DDTHH:mm:ss.SSSSZ')
     console.log('data ==>', data)
 
     const kalGraph = new KalGraph({
