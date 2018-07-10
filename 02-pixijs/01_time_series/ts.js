@@ -1,16 +1,9 @@
-const toPoints = (history) => {
-    return {
-        x: history.x,
-        y: history.y
-    }
-}
-
 const process = (response) => {
     const points = response
         .data
         .signalHistory
         .history
-        .map(toPoints)
+        .map((p) => ({ x: p.x, y: p.y }))
 
     const data = convertTimeSeries(points, 'YYYY-MM-DDTHH:mm:ss.SSSSZ')
         .map((point) => {

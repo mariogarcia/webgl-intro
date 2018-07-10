@@ -5,27 +5,6 @@
  */
 class KalGraph {
 
-    /*
-       axisX:{
-       title:"Time in Hours",
-       interval: 1,
-       intervalType:"hour",
-       minimum: new Date (2016, 01, 01, 00, 00),
-       maximum: new Date (2016, 01, 02, 00, 15),
-       gridThickness: 2,
-       labelFontColor:"black",
-       labelFontSize:12,
-       valueFormatString: "hTT"
-       },
-       axisY:{
-       interval: 10,
-       maximum: 40,
-       gridThickness: 2,
-       labelFontColor:"black",
-       labelFontSize:12,
-       },
-
-     */
     /**
      * Default constructor. It receives minimal config properties
      * for the graph
