@@ -13,7 +13,18 @@ const process = (response) => {
         .map(toPoints)
 
     const data = convertTimeSeries(points, 'YYYY-MM-DDTHH:mm:ss.SSSSZ')
-    console.log('data ==>', data)
+        .map((point) => {
+            const mat = [point.x, 0, 0, point.y, 0, 0]
+            const out = []
+
+            mat2d.scale(out, mat , [50, 5])
+
+            return new Point({
+                x: out[0],
+                y: out[3],
+                source: point
+            })
+        })
 
     const kalGraph = new KalGraph({
         width: 1200,
