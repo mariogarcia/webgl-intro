@@ -22,3 +22,8 @@ Data has dates as x values.
 - [ ] The graph should show both x and y axis
 - [ ] The graph should show x ticks
 - [ ] The graph should show y ticks
+
+### References
+
+- Linear Algebra - Transformation Matrix for Scaling 2D Objects: https://www.youtube.com/watch?v=ImeRJ8yPnUM
+- gl-matrix - Javascript Matrix and Vector library for High Performance WebGL apps: https://github.com/toji/gl-matrix
