@@ -21,7 +21,7 @@ class KalGraph {
             antialiasing: true,
             transparent: false,
             resolution: 1,
-            backgroundColor: properties.backgroundColor
+            backgroundColor: properties.backgroundColor || 0xffffff
         });
 
         this.appendViewTo = properties.appendViewTo;
@@ -62,7 +62,7 @@ class KalGraph {
         const refX = 40 // TODO remove and get the value properly
         const refY = 100 // TODO remove and get the value properly
 
-        lineGraphics.lineStyle(props.width, props.color, 1);
+        lineGraphics.lineStyle(props.width || 1, props.color || 0x333333, 1);
         lineGraphics.moveTo(origin.x, norm(origin.y, refY));
         lineGraphics.lineTo(destination.x, norm(destination.y, refY));
 

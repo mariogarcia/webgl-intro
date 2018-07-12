@@ -2,16 +2,10 @@ const start = () => {
     const URL = "http://localhost:8080/ts.json"
     const toJson  = (r) => r.json()
     const toPoint = (p) => ({ x: p.x, y: p.y })
-    const seriesProps = {
-        color: 0x333333,
-        width: 1,
-        format: 'YYYY-MM-DDTHH:mm:ss.SSSSZ'
-    }
     const kprops  = {
-        width: window.innerWidth - 100,
+        width: window.innerWidth - 25,
         height: 250,
-        appendViewTo: document.getElementById('container'),
-        backgroundColor: 0xffffff
+        appendViewTo: document.getElementById('container')
     }
 
     fetch(URL)
@@ -23,6 +17,9 @@ const start = () => {
                 .history
                 .map(toPoint)
 
-            new KalGraph(kprops).drawTimeline(data, seriesProps)
+            new KalGraph(kprops)
+                .drawTimeline(data, {
+                    format: 'YYYY-MM-DDTHH:mm:ss.SSSSZ'
+                })
         })
 }
