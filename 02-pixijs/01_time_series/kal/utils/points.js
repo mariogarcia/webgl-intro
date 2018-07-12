@@ -125,6 +125,8 @@ const convertTimeSeries = (points, timeFormat) => {
         .map((point) => convertTo(conf, new Point(point)))
 };
 
+// #TODO scaling factors should be calculated from available widths and heights
+// and distance between painted points
 const scaleFn = (canvasWidth, canvasHeight, xDist, yDist) => (point) => {
     const mat = [point.x, 0, 0, point.y, 0, 0]
     const scaleVector = [40, 5]
