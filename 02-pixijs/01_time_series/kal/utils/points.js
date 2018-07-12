@@ -124,3 +124,20 @@ const convertTimeSeries = (points, timeFormat) => {
     return sourceList
         .map((point) => convertTo(conf, new Point(point)))
 };
+
+const scaleFn = (canvasWidth, canvasHeight, xDist, yDist) => (point) => {
+    const mat = [point.x, 0, 0, point.y, 0, 0]
+    const width = Math.round(canvasWidth / xDist)
+    const height = Math.round(canvasHeight / yDist)
+    const scaleVector = [width, height]
+
+    const out = []
+
+    mat2d.scale(out, mat , scaleVector)
+
+    return new Point({
+        x: out[0],
+        y: out[3],
+        source: point
+    })
+}

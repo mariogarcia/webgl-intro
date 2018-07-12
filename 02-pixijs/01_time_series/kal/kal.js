@@ -60,8 +60,14 @@ class KalGraph {
         lineGraphics.lineStyle(props.width, props.color, 1);
         lineGraphics.moveTo(origin.x, norm(origin.y, props.refY));
         lineGraphics.lineTo(destination.x, norm(destination.y, props.refY));
-        lineGraphics.x = props.refX;
-        lineGraphics.y = props.refY;
+
+        // refX and refY is where the axis origin
+        // we cant start at 0, 0 because that means up/left corner
+        const refX = 40 // TODO remove and get the value properly
+        const refY = 100 // TODO remove and get the value properly
+
+        lineGraphics.x = refX;
+        lineGraphics.y = refY;
 
         return lineGraphics
     }
@@ -128,6 +134,22 @@ class KalGraph {
      */
     drawLine (points, props) {
         this.normalizePoints(points)
+            .flatMap((next) => {
+                const lineGraphics = this.createLine(next, props)
+                const pointsGraphics = this.createPoints(next, props)
+
+                return [lineGraphics, pointsGraphics]
+            })
+            .forEach((graphics) => this.app.stage.addChild(graphics))
+
+        return this;
+    }
+
+    drawTimeline (points, props) {
+        const fn = scaleFn(1200, 5, points.length)
+        const series = convertTimeSeries(points, props.format).map(fn)
+
+        this.normalizePoints(series)
             .flatMap((next) => {
                 const lineGraphics = this.createLine(next, props)
                 const pointsGraphics = this.createPoints(next, props)

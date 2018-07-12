@@ -21,3 +21,7 @@ div.example div {
     margin-top: 40px;
     margin-bottom: 40px;
 }
+
+canvas {
+    border: 1px solid #efcc33;
+}
